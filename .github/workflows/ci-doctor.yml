@@ -1,0 +1,101 @@
+name: 🩺 CI Doctor
+
+on:
+  # 🔹 Manual trigger (testing ke liye)
+  workflow_dispatch:
+
+  # 🔹 Auto trigger when CI workflow fails
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  diagnose:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'failure'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      # 🔹 Download failed CI logs
+      - name: Download failed CI logs
+        if: github.event_name == 'workflow_run'
+        run: |
+          echo "📥 Downloading CI logs"
+
+          curl -L \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "${{ github.event.workflow_run.logs_url }}" \
+            -o ci_logs.zip
+
+          unzip -o ci_logs.zip -d ci_logs || true
+
+          find ci_logs -type f \( -name "*.txt" -o -name "*.log" \) \
+            -exec cat {} + > logs.txt || true
+
+          if [ ! -s logs.txt ]; then
+            echo "⚠️ No logs extracted from CI run"
+          fi
+
+      # 🔹 Run CI Doctor AI Agent
+      - name: Run CI Doctor AI Agent
+        id: doctor
+        run: |
+          echo "::group::🩺 CI Doctor Diagnosis"
+
+          if [ -f logs.txt ]; then
+            grep -iE "error|failed|exception|traceback" logs.txt > filtered_logs.txt || true
+
+            if [ -s filtered_logs.txt ]; then
+              python cli.py filtered_logs.txt | tee report.txt || true
+            else
+              python cli.py logs.txt | tee report.txt || true
+            fi
+          else
+            echo "ℹ️ No logs.txt found, running doctor with dummy log"
+            echo "node-sass incompatible with Node 18" > logs.txt
+            python cli.py logs.txt | tee report.txt || true
+          fi
+
+          echo "::endgroup::"
+
+      # 🔥 POST PR / ISSUE COMMENT (AI AGENT SPEAKS)
+      - name: 🗨️ Post CI Doctor PR Comment
+        if: github.event_name != 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 🧠 Fingerprint for duplicate comment prevention
+          CI_DOCTOR_HASH: ${{ github.workflow }}-${{ github.run_id }}
+        run: |
+          if [ -s report.txt ]; then
+            python agent/output/github_comment.py report.txt
+          else
+            echo "⚠️ No report generated, skipping PR comment"
+          fi
+
+      # 🔹 Upload artifacts (debug / audit)
+      - name: Upload CI Doctor artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-doctor-artifacts
+          path: |
+            logs.txt
+            filtered_logs.txt
+            report.txt
