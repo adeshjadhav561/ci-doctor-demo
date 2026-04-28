@@ -50,11 +50,10 @@ CI Doctor can present:
 
 ## GitHub Pages
 
-Enable GitHub Pages from the repository root and use the generated link in your paper.
+🚀 Live Demo
 
-Suggested paper label:
-
-`Public demo: https://<your-username>.github.io/<your-repo>/`
+Access the public demo here:
+https://adeshjadhav561.github.io/ci-doctor-demo/
 
 ## Important note
 
