@@ -1,0 +1,6 @@
+npm ERR! code ERESOLVE
+npm ERR! ERESOLVE unable to resolve dependency tree
+npm ERR! Found: react@18.0.0
+npm ERR! Could not resolve dependency:
+npm ERR! peer react@^17.0.0 from legacy-widget@2.4.1
+npm ERR! Fix the upstream dependency conflict, or retry this command with --legacy-peer-deps

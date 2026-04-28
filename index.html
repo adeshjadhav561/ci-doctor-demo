@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CI Doctor Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Research-safe public showcase</p>
+        <h1>CI failures, explained like a senior reviewer.</h1>
+        <p class="lede">
+          This demo simulates how CI Doctor turns raw GitHub Actions failures into clear diagnosis,
+          ranked fixes, confidence scoring, and PR-ready summaries without exposing the private engine.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">Open interactive demo</a>
+          <a class="button secondary" href="./README.md">Read demo notes</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="pulse"></div>
+        <p class="card-label">Live scenario</p>
+        <h2 id="hero-title">Node dependency conflict</h2>
+        <p id="hero-summary">Peer dependency mismatch detected during npm install.</p>
+        <ul class="hero-metrics">
+          <li><span>Confidence</span><strong id="hero-confidence">92%</strong></li>
+          <li><span>Language</span><strong id="hero-language">Node</strong></li>
+          <li><span>Seen Before</span><strong id="hero-memory">Yes, 4 times</strong></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <section class="feature-strip">
+        <article>
+          <h3>Failure compression</h3>
+          <p>Long CI logs reduced to the exact failure signature that matters.</p>
+        </article>
+        <article>
+          <h3>Actionable fixes</h3>
+          <p>Suggestions are ranked so the most plausible remediation appears first.</p>
+        </article>
+        <article>
+          <h3>Memory-aware output</h3>
+          <p>Repeated failures surface stronger confidence and a seen-before signal.</p>
+        </article>
+      </section>
+
+      <section class="demo-grid" id="demo">
+        <aside class="scenario-panel">
+          <p class="section-kicker">Choose a scenario</p>
+          <div class="scenario-list" id="scenario-list"></div>
+        </aside>
+
+        <section class="terminal-panel">
+          <div class="panel-header">
+            <span>Raw CI log excerpt</span>
+            <span class="mono" id="scenario-id">node-peer-dependency</span>
+          </div>
+          <pre id="log-output"></pre>
+        </section>
+
+        <section class="report-panel">
+          <div class="panel-header">
+            <span>CI Doctor report</span>
+            <span class="mono">Mocked public output</span>
+          </div>
+          <pre id="report-output"></pre>
+        </section>
+
+        <section class="comment-panel">
+          <div class="panel-header">
+            <span>PR comment preview</span>
+            <span class="mono">GitHub-style summary</span>
+          </div>
+          <div class="comment-body" id="comment-output"></div>
+        </section>
+      </section>
+
+      <section class="architecture-note">
+        <p class="section-kicker">Public boundary</p>
+        <h2>What is visible here, and what stays private.</h2>
+        <div class="boundary-grid">
+          <div>
+            <h3>Included</h3>
+            <ul>
+              <li>broken workflow examples</li>
+              <li>sanitized failure logs</li>
+              <li>static UI for demos and papers</li>
+              <li>representative diagnosis output</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Excluded</h3>
+            <ul>
+              <li>private detection rules</li>
+              <li>confidence heuristics</li>
+              <li>memory implementation</li>
+              <li>internal automation code</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

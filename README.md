@@ -1,45 +1,62 @@
-# CI Doctor 🩺 (Demo)
+# CI Doctor Public Demo
 
-CI Doctor is a **paid CI/CD diagnosis agent**.
+CI Doctor is an AI-style CI failure diagnosis agent for GitHub Actions.
 
-It analyzes failed CI pipelines and explains:
-- **what failed**
-- **why it failed**
-- **how to fix it** (actionable steps)
+This repository is a sanitized demo for research papers, live walkthroughs, and public sharing. It intentionally excludes the private diagnosis engine while still showing the product experience:
 
-This repository is a **demo playground** to show CI Doctor in action.
-⚠️ No core engine or proprietary logic is included here.
+- broken CI workflows
+- realistic failure logs
+- polished diagnosis output
+- PR comment preview
+- GitHub Pages demo UI
 
-## What problem does it solve?
+## Why this repo exists
 
-CI failures often show:
-- long logs
-- unclear errors
-- no clear fix
+The production CI Doctor repository is private.
+This demo repository is safe to publish because it contains only:
 
-CI Doctor reads CI logs and produces a **human-readable diagnosis**
-directly inside GitHub Actions logs or PR comments.
+- mock inputs
+- mock outputs
+- a static showcase site
+- intentionally broken CI examples
 
-## Demo Flow
+It does not contain proprietary rules, ranking logic, memory logic, or internal source code.
 
-1. CI pipeline fails ❌
-2. CI Doctor runs automatically
-3. Diagnosis appears in CI logs / PR comment
+## Demo assets
 
-### Example Output
-🚑 CI Doctor
-• Category: Dependency Issue
-• Cause: node-sass incompatible with Node 18
-• Fix:
+- `index.html`: interactive static demo page for GitHub Pages
+- `.github/workflows/ci.yml`: intentionally failing workflow
+- `samples/logs/`: example CI failure logs
+- `samples/reports/`: example CI Doctor reports
+- `samples/comments/`: example PR comment output
 
-1.npm rebuild node-sass
+## What the demo shows
 
-2.OR downgrade Node to 16
-• Confidence: 90%
-🧠 Seen Before: Yes (3 times)
+CI Doctor can present:
 
-## Feedback
+- detected stack or language
+- issue category
+- likely root cause
+- ordered fix suggestions
+- confidence score
+- repeated-failure memory signal
+- PR comment formatting
 
-This is an early demo.
-If you work in DevOps / CI/CD and have feedback,
-please open an issue or discussion.
+## Demo scenarios
+
+1. Node peer dependency conflict
+2. Python module missing
+3. Docker permission issue
+
+## GitHub Pages
+
+Enable GitHub Pages from the repository root and use the generated link in your paper.
+
+Suggested paper label:
+
+`Public demo: https://<your-username>.github.io/<your-repo>/`
+
+## Important note
+
+Everything in this repo is for demonstration only.
+It is designed to show the CI Doctor experience without exposing the real implementation.

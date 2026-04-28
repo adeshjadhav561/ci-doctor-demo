@@ -1,0 +1,10 @@
+CI Doctor Report
+------------------------------
+Language: Python
+Category: Dependency Issue
+Cause: The workflow uses python-dotenv but the dependency is missing from the environment.
+Fix:
+1. Add python-dotenv to requirements.txt or pyproject dependencies
+2. Rebuild the CI environment after dependency update
+Confidence: 88%
+Seen Before: Yes (2 times)

@@ -1,0 +1,10 @@
+CI Doctor Report
+------------------------------
+Language: Node
+Category: Dependency Issue
+Cause: Peer dependency mismatch between installed React version and a legacy package.
+Fix:
+1. Retry install with npm install --legacy-peer-deps
+2. Align package versions so peer requirements match
+Confidence: 92%
+Seen Before: Yes (4 times)

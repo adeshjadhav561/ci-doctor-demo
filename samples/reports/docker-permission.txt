@@ -1,0 +1,10 @@
+CI Doctor Report
+------------------------------
+Language: Shell / Docker
+Category: Infrastructure Issue
+Cause: The runner does not have permission to access the Docker daemon.
+Fix:
+1. Use a runner with Docker access or enable the required service permissions
+2. Verify the docker.sock group membership or runner container privileges
+Confidence: 84%
+Seen Before: No

@@ -1,0 +1,4 @@
+Step 5/8 : docker build -t ci-doctor-demo .
+Got permission denied while trying to connect to the Docker daemon socket
+at unix:///var/run/docker.sock: connect: permission denied
+The command '/bin/sh -c docker build -t ci-doctor-demo .' returned a non-zero code
