@@ -53,7 +53,7 @@ CI Doctor can present:
 🚀 Live Demo
 
 Access the public demo here:
-https://adeshjadhav561.github.io/ci-doctor-demo/
+https://github.com/adeshjadhav561/ci-doctor-demo/
 
 ## Important note
 
