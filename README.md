@@ -50,9 +50,7 @@ CI Doctor can present:
 
 ## GitHub Pages
 
-🚀 Live Demo
-
-Access the public demo here:
+Access the demo here:
 https://github.com/adeshjadhav561/ci-doctor-demo/
 
 ## Important note
